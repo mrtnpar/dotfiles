@@ -22,6 +22,9 @@ Plug 'vim-utils/vim-husk'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mattn/emmet-vim'
 Plug 'fleischie/vim-styled-components'
+Plug 'reasonml-editor/vim-reason-plus'
+Plug 'sheerun/dracula-theme'
+Plug 'flazz/vim-colorschemes'
 
 Plug 'https://github.com/neomake/neomake.git'
 Plug 'https://github.com/romgrk/coffee-nvim.git'
@@ -42,10 +45,14 @@ nnoremap <C-l> :tabnext<CR>
 nnoremap <C-h> :tabprevious<CR>
 nnoremap <C-t> :tabnew<CR>
 
+if $TERM_PROGRAM =~ "iTerm"
+  set termguicolors
+endif
+
 syntax enable
+" set background=dark
+colorscheme dracula
 set number
-set background=dark
-colorscheme gruvbox
 set showcmd             " Show (partial) command in status line.
 set showmatch           " Show matching brackets.
 set showmode            " Show current mode.
@@ -144,3 +151,9 @@ set statusline+=%*
 
 " JS and JSX syntax
 let g:jsx_ext_required = 0
+
+" Ocaml/Reason
+let g:LanguageClient_serverCommands = {
+    \ 'reason': ['ocaml-language-server', '--stdio'],
+    \ 'ocaml': ['ocaml-language-server', '--stdio'],
+    \ }
