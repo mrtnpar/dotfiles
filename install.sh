@@ -33,3 +33,18 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 echo "-- Installing tmux plugins"
 rm -rf ${HOME}/.tmux/plugins/tpm
 git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
+
+echo "-- Installing XTERM profile"
+tic xterm-256color-italic.terminfo
+
+echo "
+-- # Append the following to your .zshrc
+if type nvim > /dev/null 2>&1; then
+  alias vim='nvim'
+fi
+
+alias tmux="env TERM=xterm-256color-italic tmux"
+export TERM=xterm-256color-italic
+
+export EDITOR='nvim'
+"
