@@ -50,7 +50,7 @@ if $TERM_PROGRAM =~ "iTerm"
 endif
 
 syntax enable
-" set background=dark
+set background=dark
 colorscheme dracula
 set number
 set showcmd             " Show (partial) command in status line.
