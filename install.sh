@@ -26,8 +26,12 @@ ln -sf ${PWD}/vimrc ${HOME}/.config/nvim/init.vim
 echo "-- Installing Oh My ZSH!"
 curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
-echo "-- Installing vim-plug in vim"
+echo "-- Installing vim-plug for vim"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+echo "-- Installing vim-plug for nvim"
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo "-- Installing tmux plugins"
@@ -43,8 +47,8 @@ if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
 fi
 
-alias tmux="env TERM=xterm-256color-italic tmux"
-export TERM=xterm-256color-italic
+alias tmux='TERM=xterm-256color-italic tmux'
+export TERM='xterm-256color-italic'
 
 export EDITOR='nvim'
 "
