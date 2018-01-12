@@ -13,5 +13,4 @@
   enabled = true
 [core]
   excludesfile = ~/.gitignore_global
-  editor = vim
 [user]
