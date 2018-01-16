@@ -25,16 +25,20 @@ Plug 'fleischie/vim-styled-components'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'sheerun/dracula-theme'
 Plug 'flazz/vim-colorschemes'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown'] }
 
-Plug 'https://github.com/neomake/neomake.git'
+" Plug 'https://github.com/neomake/neomake.git'
 Plug 'https://github.com/romgrk/coffee-nvim.git'
 Plug 'https://github.com/tpope/vim-vinegar.git'
 Plug 'https://github.com/terryma/vim-multiple-cursors.git'
 Plug 'https://github.com/easymotion/vim-easymotion'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/raphamorim/lucario'
-Plug 'https://github.com/vim-syntastic/syntastic'
+" Plug 'https://github.com/vim-syntastic/syntastic'
 Plug 'https://github.com/wavded/vim-stylus'
+Plug 'https://github.com/w0rp/ale'
 
 call plug#end()
 
@@ -125,29 +129,25 @@ endif
 nmap <Leader>s :%s//g<Left><Left>
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-" let g:syntastic_javascript_eslint_exe = 'yarn lint --'
-
-" let g:syntastic_error_symbol = '❌'
-" let g:syntastic_style_error_symbol = '⁉️'
-" let g:syntastic_warning_symbol = '⚠️'
-" let g:syntastic_style_warning_symbol = '💩'
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
-set statusline+=\ %#warningmsg#
-set statusline+=%{exists('g:loaded_syntastic_plugin')?SyntasticStatuslineFlag():''}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_loc_list_height = 5
+" let g:syntastic_auto_loc_list = 0
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+"
+" highlight link SyntasticErrorSign SignColumn
+" highlight link SyntasticWarningSign SignColumn
+" highlight link SyntasticStyleErrorSign SignColumn
+" highlight link SyntasticStyleWarningSign SignColumn
+" set statusline+=\ %#warningmsg#
+" set statusline+=%{exists('g:loaded_syntastic_plugin')?SyntasticStatuslineFlag():''}
+" set statusline+=%*
 
 " JS and JSX syntax
 let g:jsx_ext_required = 0
@@ -157,3 +157,4 @@ let g:LanguageClient_serverCommands = {
     \ 'reason': ['ocaml-language-server', '--stdio'],
     \ 'ocaml': ['ocaml-language-server', '--stdio'],
     \ }
+
