@@ -12,15 +12,16 @@ call plug#begin('~/.vim/plugged')
 " to install in OSX use: `brew install fzf`
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'mattn/emmet-vim'
+Plug 'skywind3000/asyncrun.vim'
 Plug 'mileszs/ack.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
 Plug 'vim-utils/vim-husk'
 Plug 'kchmck/vim-coffee-script'
-Plug 'mattn/emmet-vim'
 Plug 'styled-components/vim-styled-components'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'sheerun/dracula-theme'
@@ -39,6 +40,7 @@ Plug 'https://github.com/raphamorim/lucario'
 " Plug 'https://github.com/vim-syntastic/syntastic'
 Plug 'https://github.com/wavded/vim-stylus'
 Plug 'https://github.com/w0rp/ale'
+Plug 'https://github.com/hail2u/vim-css3-syntax'
 
 call plug#end()
 
@@ -128,27 +130,6 @@ endif
 " Search and Replace
 nmap <Leader>s :%s//g<Left><Left>
 
-" Syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-"
-" let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_loc_list_height = 5
-" let g:syntastic_auto_loc_list = 0
-" let g:syntastic_check_on_open = 0
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_javascript_eslint_exe = 'npm run lint --'
-"
-" highlight link SyntasticErrorSign SignColumn
-" highlight link SyntasticWarningSign SignColumn
-" highlight link SyntasticStyleErrorSign SignColumn
-" highlight link SyntasticStyleWarningSign SignColumn
-" set statusline+=\ %#warningmsg#
-" set statusline+=%{exists('g:loaded_syntastic_plugin')?SyntasticStatuslineFlag():''}
-" set statusline+=%*
-
 " JS and JSX syntax
 let g:jsx_ext_required = 0
 
@@ -158,3 +139,24 @@ let g:LanguageClient_serverCommands = {
     \ 'ocaml': ['ocaml-language-server', '--stdio'],
     \ }
 
+" CSS3
+augroup VimCSS3Syntax
+  autocmd!
+
+  autocmd FileType css setlocal iskeyword+=-
+augroup END
+
+" Emmet
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
+
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+
+" Async run
+autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
