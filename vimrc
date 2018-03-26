@@ -26,20 +26,15 @@ Plug 'styled-components/vim-styled-components'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'sheerun/dracula-theme'
 Plug 'flazz/vim-colorschemes'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown'] }
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
-" Plug 'https://github.com/neomake/neomake.git'
 Plug 'https://github.com/romgrk/coffee-nvim.git'
 Plug 'https://github.com/tpope/vim-vinegar.git'
 Plug 'https://github.com/terryma/vim-multiple-cursors.git'
 Plug 'https://github.com/easymotion/vim-easymotion'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/raphamorim/lucario'
-" Plug 'https://github.com/vim-syntastic/syntastic'
 Plug 'https://github.com/wavded/vim-stylus'
-Plug 'https://github.com/w0rp/ale'
 Plug 'https://github.com/hail2u/vim-css3-syntax'
 
 call plug#end()
@@ -154,9 +149,5 @@ let g:user_emmet_settings = {
     \  },
   \}
 
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
-
-" Async run
-autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
+" Prettie
+let g:prettier#exec_cmd_async = 1
