@@ -12,8 +12,8 @@ call plug#begin('~/.vim/plugged')
 " to install in OSX use: `brew install fzf`
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'othree/yajs.vim'
 Plug 'mattn/emmet-vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'mileszs/ack.vim'
@@ -26,7 +26,7 @@ Plug 'styled-components/vim-styled-components'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'sheerun/dracula-theme'
 Plug 'flazz/vim-colorschemes'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'w0rp/ale'
 
 Plug 'https://github.com/romgrk/coffee-nvim.git'
 Plug 'https://github.com/tpope/vim-vinegar.git'
@@ -149,5 +149,9 @@ let g:user_emmet_settings = {
     \  },
   \}
 
-" Prettie
-let g:prettier#exec_cmd_async = 1
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier', 'eslint']
+let g:ale_fixers['*'] = ['remove_trailing_lines', 'trim_whitespace']
+" let g:ale_fix_on_save = 1
+let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
+let g:ale_javascript_prettier_use_local_config = 1
