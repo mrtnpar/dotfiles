@@ -153,5 +153,9 @@ let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier', 'eslint']
 let g:ale_fixers['*'] = ['remove_trailing_lines', 'trim_whitespace']
 " let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
 let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_sign_error = '💩'
+let g:ale_sign_warning = '😒'
+nnoremap <C-k> :ALEFix<CR>
