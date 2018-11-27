@@ -27,6 +27,7 @@ Plug 'reasonml-editor/vim-reason-plus'
 Plug 'sheerun/dracula-theme'
 Plug 'flazz/vim-colorschemes'
 Plug 'w0rp/ale'
+Plug 'jparise/vim-graphql'
 
 Plug 'https://github.com/tpope/vim-vinegar.git'
 Plug 'https://github.com/terryma/vim-multiple-cursors.git'
@@ -35,6 +36,7 @@ Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/raphamorim/lucario'
 Plug 'https://github.com/wavded/vim-stylus'
 Plug 'https://github.com/hail2u/vim-css3-syntax'
+Plug 'https://github.com/andreshazard/vim-freemarker'
 
 call plug#end()
 
