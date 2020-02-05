@@ -1,0 +1,29 @@
+{
+  "name": "@mparees/dotfiles",
+  "version": "1.0.0",
+  "description": "Dotfiles as a node package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinparedes/dotfiles.git"
+  },
+  "keywords": [
+    "Dotfiles",
+    "mparedes"
+  ],
+  "author": "Martin Paredes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/martinparedes/dotfiles/issues"
+  },
+  "homepage": "https://github.com/martinparedes/dotfiles#readme",
+  "dependencies": {
+    "node-cmd": "^3.0.0"
+  },
+  "devDependencies": {
+    "standard": "^14.3.1"
+  }
+}
