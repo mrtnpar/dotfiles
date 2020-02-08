@@ -107,4 +107,4 @@ dist
 .vscode-test
 
 # Project
-dotfilesrc
+.dotfilesrc
