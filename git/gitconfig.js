@@ -15,11 +15,10 @@ const gitConfig = appConfig => `
 [rerere]
   enabled = true
 [core]
-  excludesfile = ${appConfig.git.core.excludesfile}
+  excludesfile = ~/.gitignore_global
   autocrlf = input
 [user]
-  name = ${appConfig.user.name}
-  email = ${appConfig.user.email}
+  name = ${appConfig.user.name || 'FIXME'}
+  email = ${appConfig.user.email || 'FIXME'}
 `
-
 module.exports = gitConfig(appConfig)
