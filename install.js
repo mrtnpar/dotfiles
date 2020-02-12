@@ -1,16 +1,53 @@
 #!/usr/bin/env node
 
-const path = require('path')
-const cmd = require('node-cmd')
+const fs = require('fs')
+const util = require('util')
 const Listr = require('listr')
+const execa = require('execa')
+const commandExists = require('command-exists')
 
-const fileOnRoot = fileName => path.join(__dirname, `./${fileName}`)
+const lastInstructions = require('./zsh/config')
 
-console.log(fileOnRoot('package-lock.json'))
+const mkdir = util.promisify(fs.mkdir)
+const appendFile = util.promisify(fs.appendFile)
+
+const home = process.env.HOME
+const requirements = ['zsh', 'git', 'vim', 'tmux']
+const prepareDirectories = ['.vim/files/swap/', '.config/nvim']
+
+const requirementsTasks = requirements.map(req => ({
+  title: `Checking dependency ${req}`,
+  task: (ctx, task) =>
+    commandExists(req)
+      .catch(() => task.skip())
+}))
+
+const prepareDirectoriesTasks = prepareDirectories.map(dir => {
+  const fullPath = `${home}/${dir}`
+  return {
+    title: `Creating directories ${dir}`,
+    task: (ctx, task) =>
+      mkdir(fullPath, { recursive: true })
+        .catch(() => task.skip())
+  }
+})
+
+const printInstructions = {
+  title: 'Appending config to .zshrc',
+  task: (ctx, task) =>
+    appendFile(`${home}/.zshrc`, lastInstructions)
+      .then(foo => console.log(foo))
+      .catch(() => task.skip())
+}
 
 new Listr([
-  {
-    title: 'Removing package-lock',
-    task: () => cmd.run('rm', [fileOnRoot('package-lock.json')])
-  }
+  ...requirementsTasks,
+  ...prepareDirectoriesTasks
+  // ...copyConfigFiles,
+  // ...installZsh,
+  // ...installVimPlug,
+  // ...installVimPlugForNvim,
+  // ...installTmuxPlugins,
+  // ...installingXtermProfile,
+  // printInstructions
 ]).run()

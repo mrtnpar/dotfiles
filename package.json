@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/martinparedes/dotfiles#readme",
   "dependencies": {
+    "bin-check": "^4.1.0",
+    "command-exists": "^1.2.8",
     "execa": "^4.0.0",
     "listr": "^0.14.3"
   },
