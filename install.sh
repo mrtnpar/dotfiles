@@ -16,7 +16,6 @@ mkdir -p ${HOME}/.vim/files/swap/
 mkdir -p ${HOME}/.config/nvim
 
 echo "-- Linking config files"
-mkdir -p ${HOME}/.config/nvim
 ln -sf ${PWD}/gitignore_global ${HOME}/.gitignore_global
 ln -sf ${PWD}/gitconfig ${HOME}/.gitconfig
 ln -sf ${PWD}/tmux.conf ${HOME}/.tmux.conf
