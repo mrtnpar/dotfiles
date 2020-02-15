@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
 const Listr = require('listr')
-// const execa = require('execa')
 
 const requirementsTasks = require('./scripts/requirements')
 const setupTasks = require('./scripts/setup')
 const copyConfigFiles = require('./scripts/copy-config-files')
-const installZsh = require('./scripts/install-zsh')
+const installOhMyZsh = require('./scripts/install-oh-my-zsh')
 const installVimPlug = require('./scripts/install-vim-plugin')
 const installVimPlugForNvim = require('./scripts/install-vim-plugin-nvim')
 const installTmuxPlugins = require('./scripts/install-tmux-plugins')
@@ -17,7 +16,7 @@ new Listr([
   ...requirementsTasks,
   ...setupTasks,
   copyConfigFiles,
-  installZsh,
+  installOhMyZsh,
   installVimPlug,
   installVimPlugForNvim,
   installTmuxPlugins,
