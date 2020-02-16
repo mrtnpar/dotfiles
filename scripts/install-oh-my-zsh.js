@@ -5,7 +5,7 @@ const execa = require('execa')
 
 const fileExist = require('../helpers/file-exist')
 
-const home = process.env.home
+const home = process.env.HOME
 const shFilePath = path.resolve('/tmp/oh-my-zsh-install.sh')
 const ohMyZshPath = path.resolve(`${home}/.oh-my-zsh`)
 
@@ -23,17 +23,17 @@ const fetchFile = new Promise((resolve, reject) => {
 })
 
 const installZsh = {
-  title: 'Installing ZSH',
+  title: 'Installing OH MY ZSH',
   task: (ctx, task) => {
     if (fileExist(ohMyZshPath)) {
+      task.skip()
+    } else {
       fetchFile
         .then(() =>
           execa.command(`sh ${shFilePath}`)
             .catch(() => task.skip())
         )
         .catch(() => task.skip())
-    } else {
-      task.skip()
     }
   }
 }

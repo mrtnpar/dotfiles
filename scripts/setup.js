@@ -1,7 +1,12 @@
 const fs = require('fs')
 const util = require('util')
 
-const prepareDirectories = ['.vim/files/swap/', '.config/nvim']
+const prepareDirectories = [
+  '.vim/files/swap/',
+  '.vim/autoload/',
+  '.config/nvim',
+  '.local/share/nvim/site/autoload'
+]
 const mkdir = util.promisify(fs.mkdir)
 const home = process.env.HOME
 
