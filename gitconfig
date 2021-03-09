@@ -14,6 +14,9 @@
 [core]
   excludesfile = ~/.gitignore_global
   autocrlf = input
-[user]
-  name = Your Name
-  email = your-email@example.com
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[diff]
+	colorMoved = zebra
