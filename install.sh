@@ -4,10 +4,6 @@ HOME="$HOME"
 echo ${PWD}
 echo ${HOME}
 
-echo "-- Creating vim/nvim/tmux  directories"
-mkdir -p ${HOME}/.vim/files/swap/
-mkdir -p ${HOME}/.config/nvim
-
 echo "-- Linking config files"
 ln -sf ${PWD}/gitignore_global ${HOME}/.gitignore_global
 ln -sf ${PWD}/gitconfig ${HOME}/.gitconfig

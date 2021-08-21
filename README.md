@@ -1,2 +1,5 @@
 dotfiles
 ========
+ ```
+ ./install.sh
+ ```
