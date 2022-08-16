@@ -1,22 +1,26 @@
 [color]
-  ui = auto
+	ui = auto
 [alias]
-  st = status
-  di = diff
-  ci = commit
-  br = branch
-  llog = log --date=local
-  m = merge --no-ff
-  co = checkout
-  d = difftool
+	m = mergetool
+	co = checkout
+	d = difftool
 [rerere]
-  enabled = true
-[core]
-  excludesfile = ~/.gitignore_global
-  autocrlf = input
+	enabled = true
 [pull]
 	rebase = true
 [fetch]
 	prune = true
+[core]
+ 	excludesfile = ~/.gitignore_global
+ 	autocrlf = input
+	editor = code --wait
 [diff]
-	colorMoved = zebra
+ 	tool = vscode
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+[merge]
+	tool = vscode
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
+[push]
+	autoSetupRemote = true
