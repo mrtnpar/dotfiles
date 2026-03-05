@@ -1,0 +1,19 @@
+model_reasoning_effort = "high"
+tool_output_token_limit = 25000
+model_auto_compact_token_limit = 233000
+personality = "pragmatic"
+model = "gpt-5.3-codex"
+
+[features]
+ghost_commit = false
+unified_exec = true
+skills = true
+shell_snapshot = true
+
+[mcp_servers.ios-simulator-mcp]
+command = "npx"
+args = ["ios-simulator-mcp@latest"]
+
+[mcp_servers.playwright]
+args = ["@playwright/mcp@latest"]
+command = "npx"

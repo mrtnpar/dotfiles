@@ -1,0 +1,5 @@
+# Local machine-specific Codex config overrides.
+# This file should live at ~/.codex/config.local.toml and must not be committed.
+
+[projects."/Users/your-user/Developer"]
+trust_level = "trusted"

@@ -1,17 +1,69 @@
-#!/bin/bash
-PWD="$PWD"
-HOME="$HOME"
-echo ${PWD}
-echo ${HOME}
+#!/usr/bin/env bash
+set -euo pipefail
 
-echo "-- Linking config files"
-ln -sf ${PWD}/gitignore_global ${HOME}/.gitignore_global
-ln -sf ${PWD}/gitconfig ${HOME}/.gitconfig
-ln -sf ${PWD}/vimrc ${HOME}/.vimrc
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ONLY="all"
+PINNED=false
 
-echo "-- Installing Oh My ZSH!"
-curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+usage() {
+  cat <<USAGE
+Usage: ./install.sh [--only tools|links|agents|skills] [--pinned]
 
-echo "-- Installing vim-plug for vim"
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+Options:
+  --only     Run only one phase. Default is all phases.
+  --pinned   Use pinned skills lock restore mode when running skills phase.
+  -h, --help Show this help message.
+USAGE
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --only)
+      [[ $# -ge 2 ]] || { echo "Missing value for --only" >&2; exit 1; }
+      ONLY="$2"
+      shift 2
+      ;;
+    --pinned)
+      PINNED=true
+      shift
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "Unknown argument: $1" >&2
+      usage
+      exit 1
+      ;;
+  esac
+done
+
+case "$ONLY" in
+  all|tools|links|agents|skills) ;;
+  *)
+    echo "Invalid --only value: $ONLY" >&2
+    usage
+    exit 1
+    ;;
+esac
+
+run_phase() {
+  local phase="$1"
+  local script="$2"
+  if [[ "$ONLY" == "all" || "$ONLY" == "$phase" ]]; then
+    echo "==> Running phase: $phase"
+    if [[ "$phase" == "skills" && "$PINNED" == "true" ]]; then
+      "$script" --pinned
+    else
+      "$script"
+    fi
+  fi
+}
+
+run_phase "tools" "$ROOT_DIR/scripts/install_tools.sh"
+run_phase "links" "$ROOT_DIR/scripts/link_dotfiles.sh"
+run_phase "agents" "$ROOT_DIR/scripts/setup_agents.sh"
+run_phase "skills" "$ROOT_DIR/scripts/install_skills.sh"
+
+echo "==> Done"

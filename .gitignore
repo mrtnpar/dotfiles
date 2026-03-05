@@ -1,1 +1,8 @@
+.DS_Store
 
+# Local optional overrides for repo templates (do not commit)
+agents/codex/config.local.toml
+agents/opencode/opencode.local.json
+
+# Temporary files
+*.tmp

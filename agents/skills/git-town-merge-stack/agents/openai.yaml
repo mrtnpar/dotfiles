@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Town Stack Merge"
+  short_description: "Merge stacked PRs to main with git town + gh"
+  default_prompt: "Use $git-town-merge-stack to merge stacked PR branches to main remotely with GitHub CLI and git town."
