@@ -11,11 +11,50 @@ link_file() {
   echo "Linked $dst -> $src"
 }
 
+copy_template_if_needed() {
+  local src="$1"
+  local dst="$2"
+  mkdir -p "$(dirname "$dst")"
+
+  if [[ -L "$dst" ]]; then
+    rm -f "$dst"
+    cp "$src" "$dst"
+    echo "Replaced symlink with local copy: $dst"
+    return
+  fi
+
+  if [[ -f "$dst" ]]; then
+    echo "Keeping existing local file: $dst"
+    return
+  fi
+
+  cp "$src" "$dst"
+  echo "Copied template $src -> $dst"
+}
+
+warn_placeholder_identity() {
+  local gitcfg="$HOME/.gitconfig"
+  if [[ ! -f "$gitcfg" ]]; then
+    return
+  fi
+
+  if rg -q '^[[:space:]]*name[[:space:]]*=[[:space:]]*Your Name[[:space:]]*$' "$gitcfg" \
+    || rg -q '^[[:space:]]*email[[:space:]]*=[[:space:]]*your-email@example.com[[:space:]]*$' "$gitcfg"; then
+    echo "WARNING: ~/.gitconfig still has placeholder identity."
+    echo "Run:"
+    echo "  git config --global user.name \"Your Real Name\""
+    echo "  git config --global user.email \"you@example.com\""
+  fi
+}
+
 echo "-- Linking dotfiles"
-link_file "$ROOT_DIR/gitignore_global" "$HOME/.gitignore_global"
-link_file "$ROOT_DIR/gitconfig" "$HOME/.gitconfig"
 link_file "$ROOT_DIR/vimrc" "$HOME/.vimrc"
-link_file "$ROOT_DIR/jj/config.toml" "$HOME/.config/jj/config.toml"
+
+echo "-- Copying local-editable templates"
+copy_template_if_needed "$ROOT_DIR/gitignore_global" "$HOME/.gitignore_global"
+copy_template_if_needed "$ROOT_DIR/gitconfig" "$HOME/.gitconfig"
+copy_template_if_needed "$ROOT_DIR/jj/config.toml" "$HOME/.config/jj/config.toml"
+warn_placeholder_identity
 
 echo "-- Ensuring Oh My Zsh"
 if [[ ! -d "$HOME/.oh-my-zsh" ]]; then

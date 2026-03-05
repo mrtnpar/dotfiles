@@ -7,7 +7,8 @@ Bootstrap script for terminal tooling, dotfiles, and AI-agent setup.
 - Homebrew tools: `nvm`, `git-town`, `jj`, `opencode`
 - Node runtime via `nvm` pinned to `v25.2.1` (from `.nvmrc`)
 - Codex CLI via npm: `@openai/codex`
-- Linked dotfiles: `.gitconfig`, `.gitignore_global`, `.vimrc`, `~/.config/jj/config.toml`
+- Linked dotfiles: `.vimrc`
+- Local-editable copies from templates: `.gitignore_global`, `.gitconfig`, `~/.config/jj/config.toml`
 - Codex config/prompt/rules templates
 - OpenCode config template
 - Repo-managed custom skills synced from `agents/skills`
@@ -44,3 +45,16 @@ Bootstrap script for terminal tooling, dotfiles, and AI-agent setup.
 - OpenCode: `~/.config/opencode/opencode.local.json`
 
 These are merged into generated target configs and should remain local-only.
+
+## Git/JJ Personal Identity
+
+- `~/.gitignore_global`, `~/.gitconfig`, and `~/.config/jj/config.toml` are installed as local files (not symlinks), so machine-local/personal values stay local.
+- Installer behavior:
+  - existing local files are preserved
+  - existing symlinks are converted to local files once
+- If `~/.gitconfig` still has placeholders, set identity with:
+
+```bash
+git config --global user.name "Your Real Name"
+git config --global user.email "you@example.com"
+```
